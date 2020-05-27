@@ -8,3 +8,10 @@ return sum;
 }
 console.log(f1(6));
 console.log(f2());
+
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="$('#avatar').click()" class="btn alert-danger">select a img file</button>
+
+    <form action="" name="form1">
+      <input type="file" name="avatar" id="avatar" />
+    </form>
+    <img src="" alt="" id="myimg" />
+
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+        const avatar = $('#avatar');
+        const myimg = $('#myimg');
+
+        avatar.change(function(){
+
+            const reader = new FileReader();
+
+            reader.addEventListener('load',function(){
+                
+                myimg.attr('src',reader.result);
+
+            })
+
+            reader.readAsDataURL(avatar[0].files[0])
+        })
+
+
+
+    </script>
+  </body>
+</html>

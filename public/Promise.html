@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promise</title>
+  </head>
+  <body>
+    1<input type="number" name="" id="num" /> 2<input
+      type="number"
+      name=""
+      id="num1"
+    />
+    3<input type="number" name="" id="num2" />
+
+    <button onclick="p()">text</button>
+
+    <div id="info">
+      <p>Start</p>
+    </div>
+  </body>
+  <script>
+    const p = new Promise((resolve, reject) => {
+      setTimeout(function () {
+        resolve("hello");
+      }, 300);
+    });
+    p.then((r) => {
+      info.innerHTML += `<h2>${r}</h2>`;
+      return '1' ;
+    })
+      .then((r) => {
+        info.innerHTML += `<h2>${r}</h2>`;
+        return '2';
+      })
+      .then((r) => {
+        info.innerHTML += `<h2>${r}</h2>`;
+        return '3';
+      });
+
+      
+  </script>
+</html>

@@ -1,0 +1,26 @@
+<%- include('parts/html-head.ejs') %> 
+
+<%- include('parts/navbar.ejs') %> 
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% sales.forEach(element=>{%> 
+      <tr>
+        <td><%= element.id %></td>
+        <td><%= element.test %></td>
+        <td><%= element.age %></td>
+      </tr>
+      <%  }) %> 
+    </tbody>
+  </table>
+  <%- include('parts/html-js.ejs') %> 
+
+  <%- include('parts/html-footer.ejs') %> 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="info"></div>
+</body>
+<script>
+
+        fetch('http://localhost:5050/address_book/api/list')
+        .then(r=>r.json())
+        .then(obj=>{
+            
+            console.log(obj)
+            info.innerHTML = JSON.stringify(obj)
+        })
+
+
+</script>
+</html>

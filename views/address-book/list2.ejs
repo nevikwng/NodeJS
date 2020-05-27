@@ -1,0 +1,133 @@
+<%- include('../parts/html-head') %>
+<%- include('../parts/navbar') %>
+<style>
+    .table a .fa-trash-alt {
+        color: #890b0b;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <!-- <li class="page-item ">
+                        <a class="page-link" href="#1"><i class="fas fa-arrow-circle-left"></i></a>
+                    </li> -->
+
+                        <li class="page-item ">
+                            <a class="page-link" href="#2">1</a>
+                        </li>
+
+                    <!-- <li class="page-item ">
+                        <a class="page-link" href="#3"><i class="fas fa-arrow-circle-right"></i></a>
+                    </li> -->
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">sid</th>
+            <th scope="col">name</th>
+            <th scope="col">email</th>
+            <th scope="col">mobile</th>
+            <th scope="col">birthday</th>
+            <th scope="col">address</th>
+        </tr>
+        </thead>
+        <tbody id="dataBody">
+        </tbody>
+    </table>
+</div>
+<%- include('../parts/html-js') %>
+<script>
+
+    let dataBody = $('#dataBody')
+    let pagination =$('.pagination')
+
+    const paginationTPL = (obj)=>{
+        console.log(obj)
+        let active = obj.active ?'active':''
+        return `<li class="page-item ${active}">
+            <a class="page-link" href="${obj.page}">
+            ${obj.page}</a>
+             </li>      
+            `
+    }
+
+
+
+    const DataTpl = (obj) =>{
+        return `
+        <tr>
+        <td>${obj.sid}</td>
+        <td>${obj.name}</td>
+        <td>${obj.email}</td>
+        <td>${obj.mobile}</td>
+        <td> ${obj.birthday}</td>
+        <td> ${obj.address}</td>
+        </tr>
+        `
+    }
+
+
+
+    const hash = () =>{
+        let h = location.hash.slice(1) || 1;
+        fetch('/address_book/api/list/'+ h)
+        .then(r=>r.json())
+        .then(obj=>{
+            console.log(obj)
+
+           let str = ''
+
+           pagination.empty();
+
+           for(let i=1; i<=obj.totalPages; i++){
+
+            str += paginationTPL({
+
+                active: h==i,
+
+                page: i
+
+            })
+        }
+
+          pagination.append(str);
+
+            //table
+            dataBody.empty();
+            str = ''
+            for (let i of obj.rows){
+                str += DataTpl(i)
+            }
+            dataBody.append(str)
+        })
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    window.addEventListener('hashchange', (event)=>{
+        hash();
+        console.log(location.hash)
+    });
+
+    hash();
+    console.log(location.hash);
+
+
+</script>
+<%- include('../parts/html-footer') %>
